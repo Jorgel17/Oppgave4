@@ -1,6 +1,6 @@
 
 
-// go run github.com/briandowns/openweathermap
+// go get github.com/briandowns/openweathermap
 // kjør den i terminalen jokke og jostein
 
 
