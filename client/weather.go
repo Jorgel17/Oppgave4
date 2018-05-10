@@ -50,7 +50,6 @@ func getLocation() *Data {
 		log.Fatalln(err)
 	}
 	defer response.Body.Close()
-
 	result, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		log.Fatalln(err)

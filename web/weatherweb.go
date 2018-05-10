@@ -20,7 +20,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-
 )
 
 // URL for å finne brukerens IP
@@ -57,11 +56,10 @@ func getCurrent(l, u, lang string) *owm.CurrentWeatherData {
 	if err != nil {
 		log.Fatal(err)
 	}
-	w.CurrentByName("Oslo, NO") // Setter plasseringen på bynavn
+	w.CurrentByName("Bergen, NO") // Setter plasseringen på bynavn
 	return w
 
 }
-
 
 // hereHandler will take are of requests coming in for the "/here" route.
 func Handler(w http.ResponseWriter, r *http.Request) {
@@ -82,6 +80,9 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	// Write out the template with the given data
 	t.Execute(w, wd)
 }
+
+
+
 
 // Run the app
 func main() {

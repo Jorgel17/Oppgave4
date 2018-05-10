@@ -106,15 +106,8 @@
 		
 		<div class="topnav">
 			<a class="active" href="#home">Home</a>
-			<a href="#about">Vær-historie</a>
-			<a href="#contact">Supergruppa</a>
-  <div class="search-container">
-  
-    <form action="/action_page.php">
-      <input type="text" placeholder="Search.." name="search">
-      <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
-  </div></div>
+			
+  </div>
 
 		
 		<p class="lead">{{range .Weather}}<img src="static/img/{{.Icon}}.png" alt="weather icon"> {{.Description}} {{end}}</p>
@@ -131,7 +124,14 @@
 			
 		</table>
 		
+		<form action="/login" method="post">
+            Bynavn:<input type="text" name="location">
+            <input type="submit" value="Gå">
+        </form>
 		
+		<form action="" method="get">
+    <input type="text" name="name" />
+</form>
 		
 		
 	</body>
