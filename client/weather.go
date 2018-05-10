@@ -65,8 +65,6 @@ func getLocation() *Data {
 }
 
 
-
-
 // getCurrent får gjeldende vær for gitt sted i de målene som er gitt
 func getCurrent(l, u, lang string) *owm.CurrentWeatherData {
 	w, err := owm.NewCurrent(u, lang, os.Getenv("OWM_API_KEY"))

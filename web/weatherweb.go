@@ -52,7 +52,7 @@ func getLocation() (*Data, error) {
 
 // getCurrent gets the current weather for the provided location in
 // the units provided.
-func getCurrent(c, u, lang string) *owm.CurrentWeatherData {
+func getCurrent(l, u, lang string) *owm.CurrentWeatherData {
 	w, err := owm.NewCurrent(u, lang, os.Getenv("OWM_API_KEY")) // Create the instance with the given unit
 	if err != nil {
 		log.Fatal(err)
