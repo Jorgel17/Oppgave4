@@ -57,6 +57,7 @@ func getCurrent(l, u, lang string) *owm.CurrentWeatherData {
 		log.Fatal(err)
 	}
 	w.CurrentByName("Bergen, NO") // Setter plasseringen på bynavn
+
 	return w
 
 }
