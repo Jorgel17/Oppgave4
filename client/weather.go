@@ -24,7 +24,6 @@ const weatherTemplate = `Current weather for {{.Name}}:
 	Wind deg:		{{.Wind.Deg}} {{.Unit}}
 
 `
-
 var (
 	whereFlag = flag.String("w", "", "Location to get weather.  If location has a space, wrap the location in double quotes.")
 	unitFlag  = flag.String("u", "", "Unit of measure to display temps in")
@@ -74,7 +73,8 @@ func getCurrent(l, u, lang string) *owm.CurrentWeatherData {
 	return w
 }
 
-func main() {
+func main() {}
+
 
 	os.Setenv("OWM_API_KEY", "81e8da958c34767cf9621033d5b47ab7")
 
@@ -101,6 +101,7 @@ func main() {
 		}
 		os.Exit(0)
 	}
+
 
 	// Process request for the given location
 	w := getCurrent(*whereFlag, *unitFlag, *langFlag)

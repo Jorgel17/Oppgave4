@@ -79,6 +79,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
 	// Write out the template with the given data
 	t.Execute(w, wd)
+	t.Execute(w, r)
 }
 
 
@@ -87,6 +88,58 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 // Run the app
 func main() {
 
+	func getMessage(temp int, ws float64, wt string) (string) {
+		var message string
+		if wt == "Regn" || wt == "Kraftig regn" || wt == "Kraftige regnbyger" {
+			message = "I dag kan du late som du bor i Bergen"
+			if temp > 15 {
+				message += "PLASKEPARTY!!!!"
+			} else if temp > 10 {
+				message += "Regnjakke. Alt du trenger"
+			} else if temp > 0 {
+				message += " Perfekt vær å sove i"
+			} else {
+				message += " Arnold Schwarzenegger i Batman & Robin. Get it?"
+			}
+		} else if wt == "Skyet" || wt == "Lettskyet" || wt == "Delvis skyet" {
+			message = "Solen er litt shy i dag"
+			if temp > 20 {
+				message += "Alt annet enn shorts i dag er ulovlig, jfr UD-21"
+			} else if temp > 10 {
+				message += " Nice temp, do what you want, brother"
+			} else if temp > 0 {
+				message += "Surt. Bare surt"
+			} else {
+				message += " You gonna freez boy!"
+			}
+		} else if wt == "Klarvær" || wt == "Sol" {
+			message = "Suns out, guns out!."
+			if temp > 20 {
+				message += " Varmere enn djevelsens baller i dag."
+			} else if temp > 10 {
+				message += "Alt er lov i dag"
+			} else if temp > 0 {
+				message += " Ufyselig kaldt, men du overlever."
+			} else {
+				message += "Sibirtilstander i dag"
+			}
+		} else {
+			message = ""
+			if temp > 20 {
+				message += "Spådom: Air Condition er din bestevenn i dag."
+			} else if temp > 10 {
+				message += "Hvis du er kul tar du på shorts, er du smart tar du på litt mer klær."
+			} else if temp > 0 {
+				message += "You gonna freez boy!."
+			}
+			if ws > 10 {
+				message += " Det blåser mer enn Stavanger en sommer dag, på med allværsjakke!."
+			}
+		}
+		return message
+	}
+
+	
 	//api Key
 	os.Setenv("OWM_API_KEY", "81e8da958c34767cf9621033d5b47ab7")
 
