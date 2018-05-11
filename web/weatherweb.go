@@ -22,6 +22,7 @@ import (
 	"os"
 	"fmt"
 	"strings"
+	
 )
 
 // URL for å finne brukerens IP
@@ -51,18 +52,7 @@ func getLocation() (*Data, error) {
 	return r, nil
 }
 
-// getCurrent gets the current weather for the provided location in
-// the units provided.
-func getCurrent(l, u, lang string) *owm.CurrentWeatherData {
-	w, err := owm.NewCurrent(u, lang, os.Getenv("OWM_API_KEY")) // Create the instance with the given unit
-	if err != nil {
-		log.Fatal(err)
-	}
-	w.CurrentByName("Bergen, NO") // Setter plasseringen på bynavn
 
-	return w
-
-}
 
 // hereHandler will take are of requests coming in for the "/here" route.
 func Handler(w http.ResponseWriter, r *http.Request) {
@@ -87,7 +77,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
 
 
-func sayhelloName(w http.ResponseWriter, r *http.Request) {
+func Sok(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm() //Parse url parameters passed, then parse the response packet for the POST body (request body)
 	// attention: If you do not call ParseForm method, the following data can not be obtained form
 	fmt.Println(r.Form) // print information on server side.
@@ -98,30 +88,44 @@ func sayhelloName(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("key:", k)
 		fmt.Println("val:", strings.Join(v, ""))
 	}
-	fmt.Fprintf(w, "Hello astaxie!") // write data to response
+	fmt.Fprintf(w, "") // write data to response
 }
 
-func login(w http.ResponseWriter, r *http.Request) {
+func Weather(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("method:", r.Method) //get request method
 	if r.Method == "GET" {
-		t, _ := template.ParseFiles("login.gtpl")
+		t, _ := template.ParseFiles("templates/here.html")
 		t.Execute(w, nil)
 	} else {
 		r.ParseForm()
 		// logic part of log in
-		fmt.Println("username:", r.Form["username"])
-		fmt.Println("password:", r.Form["password"])
+		fmt.Println("Bynavn", r.Form["username"])
+		fmt.Println("Landskode", r.Form["password"])
 	}
 }
 
+// getCurrent gets the current weather for the provided location in
+// the units provided.
+func getCurrent(l, u, lang string) *owm.CurrentWeatherData {
+	w, err := owm.NewCurrent(u, lang, os.Getenv("OWM_API_KEY")) // Create the instance with the given unit
+	if err != nil {
+		log.Fatal(err)
+	}
+
+
+	w.CurrentByName("Oslo, NO") // Setter plasseringen på bynavn
+
+	return w
+
+}
 
 
 
 // Run the app
 func main() {
 
-	http.HandleFunc("/", sayhelloName) // setting router rule
-	http.HandleFunc("/login", login)
+	http.HandleFunc("/Soking", Sok) // setting router rule
+	http.HandleFunc("/Weather", Weather)
 
 	//api Key
 	os.Setenv("OWM_API_KEY", "81e8da958c34767cf9621033d5b47ab7")
